@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 rootProject.name = "vk-cup-selection-2022"
 include ':app'
 include ':core-theme'
+include ':feature-multi-stage-poll'
