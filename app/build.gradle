@@ -32,6 +32,8 @@ android {
 }
 
 dependencies {
+    implementation project(":core-theme")
+
     implementation(core)
     implementation(activity)
     implementation(composeUI)
