@@ -21,6 +21,8 @@ data class VKColors(
     val correctBackground: Color,
     val uncorrect: Color,
     val uncorrectBackground: Color,
+    val symbolPrimary: Color,
+    val disabled: Color,
 )
 
 val LocalVKColors = staticCompositionLocalOf { LightTheme }
@@ -32,6 +34,8 @@ val LightTheme = VKColors(
     correctBackground = correctBackground,
     uncorrect = uncorrect,
     uncorrectBackground = uncorrectBackground,
+    symbolPrimary = Color(0xFF111111),
+    disabled = Color(0xFFB0B0B0),
 )
 
 val DarkTheme = VKColors(
@@ -41,6 +45,8 @@ val DarkTheme = VKColors(
     correctBackground = correctBackground,
     uncorrect = uncorrect,
     uncorrectBackground = uncorrectBackground,
+    symbolPrimary = Color(0xFFF0F0F0),
+    disabled = Color(0xFFB0B0B0),
 )
 
 internal val DarkColors = darkColorScheme(
