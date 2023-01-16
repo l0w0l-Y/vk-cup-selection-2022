@@ -1,5 +1,6 @@
 package com.kaleksandra.featurerate.presentation.ui
 
+import android.annotation.SuppressLint
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.layout.Column
@@ -7,8 +8,11 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -42,25 +46,30 @@ fun RatingBar(navController: NavController) {
     }
 }
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RatingBar(onContinueClick: (Float) -> Unit) {
     var rating by remember { mutableStateOf(initialRating) }
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(Dimen.padding_16)
-    ) {
-        Text(
-            text = stringResource(id = R.string.title_article_rating),
-            style = MaterialTheme.typography.headlineSmall
-        )
-        RatingBar(value = rating, onValueChange = { rating = it })
-        AnimatedVisibility(rating != initialRating) {
-            VKButton(
-                text = stringResource(id = CoreCommonR.string.button_continue),
-                onClick = { onContinueClick(rating) },
+    Scaffold {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(Dimen.padding_16)
+        ) {
+            Text(
+                text = stringResource(id = R.string.title_article_rating),
+                style = MaterialTheme.typography.headlineSmall,
+                modifier = Modifier.padding(bottom = Dimen.padding_12)
             )
+            RatingBar(value = rating, onValueChange = { rating = it })
+            AnimatedVisibility(rating != initialRating) {
+                VKButton(
+                    text = stringResource(id = CoreCommonR.string.button_continue),
+                    onClick = { onContinueClick(rating) },
+                )
+            }
         }
     }
 }

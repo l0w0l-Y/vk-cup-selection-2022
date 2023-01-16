@@ -19,6 +19,7 @@ import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -58,6 +59,8 @@ fun PollResult(answer: String, description: String?, type: Type, percentage: Str
         ) {
             Text(
                 text = answer,
+                style = MaterialTheme.typography.bodyMedium,
+                color = AppTheme.colors.symbolPrimary,
             )
             if (type == Type.CORRECT || type == Type.UNCORRECT) {
                 description?.let {
@@ -77,6 +80,8 @@ fun PollResult(answer: String, description: String?, type: Type, percentage: Str
         }
         Text(
             text = percentage,
+            style = MaterialTheme.typography.bodyMedium,
+            color = AppTheme.colors.symbolPrimary,
         )
     }
 }
@@ -102,8 +107,9 @@ fun PollButton(answer: String, onButtonClick: () -> Unit, modifier: Modifier = M
         ) {
             Text(
                 text = answer,
-                color = AppTheme.colors.symbolPrimary,
                 textAlign = TextAlign.Start,
+                style = MaterialTheme.typography.bodyMedium,
+                color = AppTheme.colors.symbolPrimary,
                 modifier = Modifier.fillMaxWidth(),
             )
         }

@@ -1,5 +1,6 @@
 package com.kaleksandra.featuremapelements.presentation.ui
 
+import android.annotation.SuppressLint
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -10,7 +11,9 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -55,6 +58,8 @@ fun MapElementsScreen(
     )
 }
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MapElementsScreen(
     uiState: UIState,
@@ -72,32 +77,34 @@ fun MapElementsScreen(
             second = null
         }
     }
-    Column(
-        verticalArrangement = Arrangement.spacedBy(Dimen.padding_16),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.padding(Dimen.padding_16),
-    ) {
-        Text(
-            text = stringResource(id = R.string.title_map_elements),
-            style = MaterialTheme.typography.headlineSmall,
-        )
-        Row(
-            horizontalArrangement = Arrangement.spacedBy(Dimen.padding_8)
+    Scaffold {
+        Column(
+            verticalArrangement = Arrangement.spacedBy(Dimen.padding_16),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.padding(Dimen.padding_16),
         ) {
-            Elements(
-                value = first, list = uiState.elements.firsts,
-                modifier = Modifier.weight(Dimen.weight_1)
-            ) { first = it }
-            Elements(
-                value = second, list = uiState.elements.seconds,
-                modifier = Modifier.weight(Dimen.weight_1)
-            ) { second = it }
-        }
-        AnimatedVisibility(uiState.elements.firsts.all { it.complete }) {
-            VKButton(
-                text = stringResource(id = CoreCommonR.string.button_continue),
-                onClick = onContinueClick,
+            Text(
+                text = stringResource(id = R.string.title_map_elements),
+                style = MaterialTheme.typography.headlineSmall,
             )
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(Dimen.padding_8)
+            ) {
+                Elements(
+                    value = first, list = uiState.elements.firsts,
+                    modifier = Modifier.weight(Dimen.weight_1)
+                ) { first = it }
+                Elements(
+                    value = second, list = uiState.elements.seconds,
+                    modifier = Modifier.weight(Dimen.weight_1)
+                ) { second = it }
+            }
+            AnimatedVisibility(uiState.elements.firsts.all { it.complete }) {
+                VKButton(
+                    text = stringResource(id = CoreCommonR.string.button_continue),
+                    onClick = onContinueClick,
+                )
+            }
         }
     }
 }
@@ -128,7 +135,6 @@ fun Elements(
                     style = MaterialTheme.typography.bodyMedium,
                     color = AppTheme.colors.symbolPrimary,
                 )
-
             }
         }
     }

@@ -1,5 +1,6 @@
 package com.kaleksandra.featuredraggap.presentation.ui
 
+import android.annotation.SuppressLint
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -9,7 +10,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -51,67 +54,71 @@ fun DragGapScreen(
     )
 }
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DragGapScreen(
     uiState: UIState,
     onContinueClick: () -> Unit,
     onWordChange: (Int, String) -> Unit,
 ) {
-    Column(
-        verticalArrangement = Arrangement.spacedBy(Dimen.padding_16),
-    ) {
-        LongPressDraggable(modifier = Modifier.fillMaxSize()) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(Dimen.padding_16),
-                verticalArrangement = Arrangement.spacedBy(Dimen.padding_16),
-                horizontalAlignment = Alignment.CenterHorizontally,
-            ) {
-                Text(
-                    text = stringResource(id = R.string.title_drag_gap),
-                    style = MaterialTheme.typography.headlineSmall,
-                    modifier = Modifier.fillMaxWidth(),
-                )
-                FlowRow(
-                    mainAxisSpacing = Dimen.axis_4,
-                    crossAxisSpacing = Dimen.axis_4,
-                    crossAxisAlignment = FlowCrossAxisAlignment.Center,
-                    modifier = Modifier.fillMaxWidth()
+    Scaffold {
+        Column(
+            verticalArrangement = Arrangement.spacedBy(Dimen.padding_16),
+        ) {
+            LongPressDraggable(modifier = Modifier.fillMaxSize()) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(Dimen.padding_16),
+                    verticalArrangement = Arrangement.spacedBy(Dimen.padding_16),
+                    horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
-                    val textIterator = uiState.text.iterator()
-                    val gapsIterator = uiState.gaps.listIterator()
-                    while (textIterator.hasNext() || gapsIterator.hasNext()) {
-                        if (textIterator.hasNext()) {
-                            val text = textIterator.next().split(' ')
-                            text.forEach {
-                                Text(
-                                    text = it,
-                                    style = MaterialTheme.typography.bodySmall
-                                )
+                    Text(
+                        text = stringResource(id = R.string.title_drag_gap),
+                        style = MaterialTheme.typography.headlineSmall,
+                        modifier = Modifier.fillMaxWidth(),
+                    )
+                    FlowRow(
+                        mainAxisSpacing = Dimen.axis_4,
+                        crossAxisSpacing = Dimen.axis_4,
+                        crossAxisAlignment = FlowCrossAxisAlignment.Center,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        val textIterator = uiState.text.iterator()
+                        val gapsIterator = uiState.gaps.listIterator()
+                        while (textIterator.hasNext() || gapsIterator.hasNext()) {
+                            if (textIterator.hasNext()) {
+                                val text = textIterator.next().split(' ')
+                                text.forEach {
+                                    Text(
+                                        text = it,
+                                        style = MaterialTheme.typography.bodySmall
+                                    )
+                                }
+                            }
+                            if (gapsIterator.hasNext()) {
+                                val index = gapsIterator.nextIndex()
+                                val word = gapsIterator.next()
+                                WordGap(word) { onWordChange(index, it) }
                             }
                         }
-                        if (gapsIterator.hasNext()) {
-                            val index = gapsIterator.nextIndex()
-                            val word = gapsIterator.next()
-                            WordGap(word) { onWordChange(index, it) }
+                    }
+                    FlowRow(
+                        mainAxisSpacing = Dimen.axis_8,
+                        crossAxisSpacing = Dimen.axis_8,
+                        crossAxisAlignment = FlowCrossAxisAlignment.Center,
+                    ) {
+                        uiState.options.forEach {
+                            WordOption(word = it)
                         }
                     }
-                }
-                FlowRow(
-                    mainAxisSpacing = Dimen.axis_8,
-                    crossAxisSpacing = Dimen.axis_8,
-                    crossAxisAlignment = FlowCrossAxisAlignment.Center,
-                ) {
-                    uiState.options.forEach {
-                        WordOption(word = it)
+                    AnimatedVisibility(uiState.gaps.all { it.isNotEmpty() }) {
+                        VKButton(
+                            text = stringResource(id = CoreCommonR.string.button_continue),
+                            onClick = onContinueClick
+                        )
                     }
-                }
-                AnimatedVisibility(uiState.gaps.all { it.isNotEmpty() }) {
-                    VKButton(
-                        text = stringResource(id = CoreCommonR.string.button_continue),
-                        onClick = onContinueClick
-                    )
                 }
             }
         }
@@ -158,7 +165,11 @@ fun WordOption(word: String) {
                 .defaultMinSize(minWidth = Dimen.width_24),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Text(text = word, style = MaterialTheme.typography.bodyMedium)
+            Text(
+                text = word,
+                style = MaterialTheme.typography.bodyMedium,
+                color = AppTheme.colors.symbolPrimary,
+            )
         }
     }
 }

@@ -21,6 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.kaleksandra.corecommon.R
+import com.kaleksandra.coretheme.AppTheme
 import com.kaleksandra.coretheme.Dimen
 import com.kaleksandra.coretheme.VkCupSelection2022Theme
 import com.kaleksandra.coreui.VKButton
@@ -70,7 +71,7 @@ fun MultiStagePollScreen(
                 Text(
                     text = question.question,
                     style = MaterialTheme.typography.headlineSmall,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
                 )
 
                 LazyColumn(verticalArrangement = Arrangement.spacedBy(Dimen.padding_8)) {

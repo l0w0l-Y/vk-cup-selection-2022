@@ -19,6 +19,7 @@ val darkOnBackground = Color(0x7AFFFFFF)
 val darkSurface = Color(0x2EFFFFFF)
 val darkOnSurface = Color(0xFFFFFFFF)
 val secondary = Color(0xFFE4EAF1)
+val darkSecondary = Color(0xFFCAD0D8)
 val correct = Color(0xFF4EB54F)
 val correctBackground = Color(0xFFA6EAB7)
 val uncorrect = Color(0xFFB63737)
@@ -53,13 +54,13 @@ val LightTheme = VKColors(
 
 val DarkTheme = VKColors(
     primary = primary,
-    secondary = secondary,
+    secondary = darkSecondary,
     tertiary = tertiary,
     correct = correct,
     correctBackground = correctBackground,
     uncorrect = uncorrect,
     uncorrectBackground = uncorrectBackground,
-    symbolPrimary = Color(0xFFF0F0F0),
+    symbolPrimary = Color(0xFF111111),
     disabled = Color(0xFFB0B0B0),
 )
 
