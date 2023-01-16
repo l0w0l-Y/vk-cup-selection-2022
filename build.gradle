@@ -6,6 +6,10 @@ buildscript {
         lifecycle_version = '2.5.1'
         material3_version = '1.1.0-alpha02'
         accompanist_version = '0.28.0'
+        hilt_version = '2.42'
+        navigation_version = '2.5.2'
+        hilt_navigation_version = '1.0.0'
+        accompanist_version = '0.28.0'
 
         core = "androidx.core:core-ktx:$core_version"
         composeUI = "androidx.compose.ui:ui:$compose_version"
@@ -16,6 +20,10 @@ buildscript {
         lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
         lifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version"
         flowlayout = "com.google.accompanist:accompanist-flowlayout:$accompanist_version"
+        hiltDep = "com.google.dagger:hilt-android:$hilt_version"
+        hiltKapt = "com.google.dagger:hilt-compiler:$hilt_version"
+        hiltNavigation = "androidx.hilt:hilt-navigation-compose:$hilt_navigation_version"
+        flowlayout = "com.google.accompanist:accompanist-flowlayout:$accompanist_version"
     }
 }
 
@@ -23,6 +31,7 @@ plugins {
     id 'com.android.application' version '7.3.1' apply false
     id 'com.android.library' version '7.3.1' apply false
     id 'org.jetbrains.kotlin.android' version '1.7.20' apply false
+    id 'com.google.dagger.hilt.android' version '2.42' apply false
 }
 
 subprojects {

@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'com.google.dagger.hilt.android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -33,8 +35,18 @@ android {
 
 dependencies {
     implementation project(":core-theme")
+    implementation project(":feature-multi-stage-poll")
+    implementation project(":feature-map-elements")
+    implementation project(":feature-rate")
+    implementation project(":feature-drag-gap")
+    implementation project(":feature-fill-gap")
 
     implementation(core)
     implementation(activity)
+    implementation(material3)
     implementation(composeUI)
+
+    implementation(hiltDep)
+    kapt(hiltKapt)
+    implementation(hiltNavigation)
 }
