@@ -1,21 +1,16 @@
 package com.kaleksandra.featuremultistagepoll.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.kaleksandra.featuremultistagepoll.presentation.model.Answer
 import com.kaleksandra.featuremultistagepoll.presentation.model.AnswerState
 import com.kaleksandra.featuremultistagepoll.presentation.model.Question
 import com.kaleksandra.featuremultistagepoll.presentation.model.Type
 import com.kaleksandra.featuremultistagepoll.presentation.model.UIState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
-
 import javax.inject.Inject
-import kotlin.random.Random
 
 @HiltViewModel
 class MultiStagePollViewModel @Inject constructor() : ViewModel() {
@@ -24,24 +19,11 @@ class MultiStagePollViewModel @Inject constructor() : ViewModel() {
     val uiState: StateFlow<UIState> = _uiState
 
     init {
-        viewModelScope.launch {
-            delay(20000)
-        }
-        //TODO: Only for preview
-        _uiState.update {
-            it.copy(
-                question = Question(
-                    Random.nextInt(1, Int.MAX_VALUE),
-                    "Первый вопрос",
-                    listOf("один", "два", "три", "четыре")
-                ),
-                pollSize = Int.MAX_VALUE,
-            )
-        }
+        getTask()
     }
 
     fun getAnswer(index: Int) {
-        //TODO: Only for preview
+        //TODO: Add getting answer from the network
         _uiState.update {
             it.copy(
                 answer = Answer(
@@ -49,31 +31,45 @@ class MultiStagePollViewModel @Inject constructor() : ViewModel() {
                     your = index,
                     listOf(
                         AnswerState(
-                            "first",
-                            "Good answer, but not correct",
+                            "Оранжевый жираф",
+                            "Тут же даже рифмы нет :(",
                             getType(0, index, 2),
                             "13.4%"
                         ),
                         AnswerState(
-                            "first",
-                            "Good answer, but not correct",
+                            "Синий слон",
+                            "А слоны точно синие?",
                             getType(1, index, 2),
                             "25.0%"
                         ),
                         AnswerState(
-                            "first",
-                            "Good answer, but not correct",
+                            "Зеленый попугай",
+                            "И зеленый попугааай!",
                             getType(2, index, 2),
                             "1.6%"
                         ),
                         AnswerState(
-                            "first",
-                            "Good answer, but not correct",
+                            "Синий попугай",
+                            "Почти верно, только попугай был зеленый",
                             getType(3, index, 2),
                             "60.0%"
                         )
                     )
                 )
+            )
+        }
+    }
+
+    private fun getTask() {
+        //TODO: Add getting tasks from the network
+        _uiState.update {
+            it.copy(
+                question = Question(
+                    "Ах, крокодилы, бегемоты!\n" +
+                            "Ах, обезьяны, кашалоты!\n" +
+                            "Ах, и зеленый...",
+                    listOf("Оранжевый жираф", "Синий слон", "Зеленый попугай", "Синий попугай")
+                ),
             )
         }
     }

@@ -9,7 +9,7 @@ import androidx.navigation.compose.rememberNavController
 import com.kaleksandra.coretheme.VkCupSelection2022Theme
 import com.kaleksandra.featuredraggap.presentation.ui.DragGapScreen
 import com.kaleksandra.featurefillgap.presentation.ui.FillGapScreen
-import com.kaleksandra.featuremapelements.MapElementsScreen
+import com.kaleksandra.featuremapelements.presentation.ui.MapElementsScreen
 import com.kaleksandra.featuremultistagepoll.presentation.ui.MultiStagePollScreen
 import com.kaleksandra.featurerate.presentation.ui.RatingBar
 import dagger.hilt.android.AndroidEntryPoint

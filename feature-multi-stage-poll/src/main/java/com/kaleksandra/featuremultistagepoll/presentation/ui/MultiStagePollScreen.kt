@@ -5,6 +5,7 @@ import android.content.res.Configuration
 import androidx.compose.animation.*
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -13,13 +14,16 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.kaleksandra.coretheme.AppTheme
+import com.kaleksandra.corecommon.R
 import com.kaleksandra.coretheme.Dimen
 import com.kaleksandra.coretheme.VkCupSelection2022Theme
+import com.kaleksandra.coreui.VKButton
 import com.kaleksandra.featuremultistagepoll.presentation.model.Question
 import com.kaleksandra.featuremultistagepoll.presentation.model.UIState
 import com.kaleksandra.featuremultistagepoll.presentation.ui.core.PollButton
@@ -55,18 +59,18 @@ fun MultiStagePollScreen(
     onContinueClick: () -> Unit,
 ) {
     Scaffold {
-        Column(modifier = Modifier.padding(horizontal = Dimen.padding_16)) {
+        Column(
+            verticalArrangement = Arrangement.spacedBy(Dimen.padding_16),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .padding(Dimen.padding_16)
+                .fillMaxWidth(),
+        ) {
             with(uiState) {
-                Text(
-                    text = "Вопрос ${question.number} / $pollSize",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = AppTheme.colors.disabled,
-                    modifier = Modifier.padding(vertical = Dimen.padding_28)
-                )
                 Text(
                     text = question.question,
                     style = MaterialTheme.typography.headlineSmall,
-                    modifier = Modifier.padding(bottom = Dimen.padding_8)
+                    modifier = Modifier.fillMaxWidth()
                 )
 
                 LazyColumn(verticalArrangement = Arrangement.spacedBy(Dimen.padding_8)) {
@@ -95,11 +99,11 @@ fun MultiStagePollScreen(
                         }
                     }
                 }
-
-                AnimatedVisibility(answer != null, enter = fadeIn()) {
-                    Button(onContinueClick) {
-                        Text(text = "Продолжить")
-                    }
+                AnimatedVisibility(answer != null) {
+                    VKButton(
+                        text = stringResource(id = R.string.button_continue),
+                        onClick = onContinueClick,
+                    )
                 }
             }
         }
@@ -113,8 +117,7 @@ private fun Preview() {
     VkCupSelection2022Theme {
         MultiStagePollScreen(
             UIState(
-                question = Question(1, "Первый вопрос", listOf("один", "два", "три", "четыре")),
-                pollSize = Int.MAX_VALUE,
+                question = Question("Первый вопрос", listOf("один", "два", "три", "четыре")),
             ), {}, {}
         )
     }

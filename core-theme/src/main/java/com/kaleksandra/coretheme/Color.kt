@@ -8,6 +8,7 @@ import androidx.compose.ui.graphics.Color
 
 val primary = Color(0xFFFF5317)
 val onPrimary = Color(0xFFFFFFFF)
+val tertiary = Color(0xFFF06130)
 val onBackground = Color(0xA3000000)
 val surface = Color(0xFFE6E6E6)
 val onSurface = Color(0xFF202020)
@@ -27,6 +28,7 @@ val uncorrectBackground = Color(0xFFE79191)
 data class VKColors(
     val primary: Color,
     val secondary: Color,
+    val tertiary: Color,
     val correct: Color,
     val correctBackground: Color,
     val uncorrect: Color,
@@ -40,6 +42,7 @@ val LocalVKColors = staticCompositionLocalOf { LightTheme }
 val LightTheme = VKColors(
     primary = primary,
     secondary = secondary,
+    tertiary = tertiary,
     correct = correct,
     correctBackground = correctBackground,
     uncorrect = uncorrect,
@@ -51,6 +54,7 @@ val LightTheme = VKColors(
 val DarkTheme = VKColors(
     primary = primary,
     secondary = secondary,
+    tertiary = tertiary,
     correct = correct,
     correctBackground = correctBackground,
     uncorrect = uncorrect,

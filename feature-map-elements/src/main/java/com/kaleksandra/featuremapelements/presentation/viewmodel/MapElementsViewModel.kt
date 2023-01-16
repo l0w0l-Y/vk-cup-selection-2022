@@ -1,13 +1,13 @@
-package com.kaleksandra.featuremapelements
+package com.kaleksandra.featuremapelements.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import com.kaleksandra.featuremapelements.presentation.model.Elements
+import com.kaleksandra.featuremapelements.presentation.model.UIState
+import com.kaleksandra.featuremapelements.presentation.tests
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -16,46 +16,27 @@ class MapElementsViewModel @Inject constructor() : ViewModel() {
     val uiState: StateFlow<UIState> = _uiState
 
     init {
-        viewModelScope.launch {
-            delay(20000)
-        }
-        //TODO: Only for preview
-        _uiState.update {
-            it.copy(
-                elements = Elements(
-                    listOf(
-                        Element(0, "first"),
-                        Element(1, "second"),
-                        Element(2, "third"),
-                        Element(3, "fourth")
-                    ), listOf(
-                        Element(0, "first"),
-                        Element(1, "second"),
-                        Element(2, "third"),
-                        Element(3, "fourth")
-                    ), listOf(
-                        0 to 0,
-                        1 to 1,
-                        2 to 2,
-                        3 to 3,
-                    )
-                )
-            )
-        }
-        _uiState.update {
-            it.copy(
-                elements = it.elements.copy(
-                    firsts = it.elements.firsts.shuffled(),
-                    seconds = it.elements.seconds.shuffled(),
-                )
-            )
-        }
+        getTask()
     }
 
     fun onSelectBoth(first: Int, second: Int) {
         val pair = _uiState.value.elements.pairs.first { it.first == first }
-        if (pair.second == second ) {
+        if (pair.second == second) {
             completeElement(first, second)
+        }
+    }
+
+    private fun getTask() {
+        //TODO: Add getting tasks from the network
+        val elements = tests.random()
+        _uiState.update {
+            UIState(
+                elements = Elements(
+                    firsts = elements.firsts.shuffled(),
+                    seconds = elements.seconds.shuffled(),
+                    pairs = elements.pairs
+                )
+            )
         }
     }
 

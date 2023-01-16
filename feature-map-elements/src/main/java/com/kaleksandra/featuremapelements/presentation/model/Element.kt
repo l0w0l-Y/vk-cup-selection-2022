@@ -1,4 +1,4 @@
-package com.kaleksandra.featuremapelements
+package com.kaleksandra.featuremapelements.presentation.model
 
 data class Element(
     val id: Int = 0,
