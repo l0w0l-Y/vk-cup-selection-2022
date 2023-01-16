@@ -34,11 +34,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.kaleksandra.coretheme.AppTheme
 import com.kaleksandra.coretheme.Dimen
 import com.kaleksandra.coretheme.VkCupSelection2022Theme
+import com.kaleksandra.featuremultistagepoll.presentation.model.Type
 import com.kaleksandra.corecommon.R as CoreCommonR
-
-enum class Type {
-    CORRECT, UNCORRECT, DEFAULT,
-}
 
 @Composable
 fun PollResult(answer: String, description: String?, type: Type, percentage: String) {

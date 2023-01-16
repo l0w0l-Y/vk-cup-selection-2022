@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_article_rating">Оцените прочитанную статью</string>
+    <string name="icon_desc_rating_star">Звезда рейтинга</string>
+</resources>

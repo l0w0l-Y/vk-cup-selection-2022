@@ -5,8 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.kaleksandra.featuremultistagepoll.presentation.model.Answer
 import com.kaleksandra.featuremultistagepoll.presentation.model.AnswerState
 import com.kaleksandra.featuremultistagepoll.presentation.model.Question
+import com.kaleksandra.featuremultistagepoll.presentation.model.Type
 import com.kaleksandra.featuremultistagepoll.presentation.model.UIState
-import com.kaleksandra.featuremultistagepoll.presentation.ui.core.Type
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow

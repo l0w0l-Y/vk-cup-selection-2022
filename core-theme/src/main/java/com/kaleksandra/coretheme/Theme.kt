@@ -16,7 +16,8 @@ fun VkCupSelection2022Theme(
     CompositionLocalProvider(LocalVKColors provides colors) {
         MaterialTheme(
             colorScheme = materialColors,
-            content = content
+            typography = Typography,
+            content = content,
         )
     }
 }

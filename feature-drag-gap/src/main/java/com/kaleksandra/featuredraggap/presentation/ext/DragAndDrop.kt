@@ -1,3 +1,5 @@
+package com.kaleksandra.featuredraggap.presentation.ext
+
 import androidx.compose.foundation.gestures.detectDragGesturesAfterLongPress
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
@@ -93,7 +95,7 @@ fun <T> DragTarget(
 @Composable
 fun <T> DropTarget(
     modifier: Modifier = Modifier,
-    content: @Composable() (BoxScope.(isInBound: Boolean, data: T?) -> Unit)
+    content: @Composable (BoxScope.(isInBound: Boolean, data: T?) -> Unit)
 ) {
 
     val dragInfo = LocalDragTargetInfo.current

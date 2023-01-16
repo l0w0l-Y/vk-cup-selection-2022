@@ -1,4 +1,4 @@
-package com.kaleksandra.featurefillgap
+package com.kaleksandra.featuredraggap.presentation.model
 
 data class UIState(
     val text: List<String> = listOf(),

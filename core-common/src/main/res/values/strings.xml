@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="icon_desc_check">Icon Check</string>
+    <string name="button_poll">Многоступенчатый опрос</string>
+    <string name="button_drag_gap">Перетаскивание вариантов</string>
+    <string name="button_fill_gap">Заполнение пропуска</string>
+    <string name="button_map_elements">Сопоставление элементов</string>
+    <string name="button_rate">Оценка</string>
+    <string name="button_continue">Продолжить</string>
 </resources>
